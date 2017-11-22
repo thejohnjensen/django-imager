@@ -65,4 +65,22 @@ class ProfileTests(TestCase):
         user_one = User.objects.get()
         self.assertTrue(user_one.username == 'bob')
 
-    
+    def test_user_profile_has_url_field(self):
+        """Test user has URL Field."""
+        self.assertIsNotNone(self.user.profile.website)
+
+    def test_user_profile_has_location(self):
+        """Test user has location."""
+        self.assertIsNotNone(self.user.profile.location)
+
+    def test_user_profile_has_fee(self):
+        """Test user has location."""
+        self.assertIsNone(self.user.profile.fee)
+
+    def test_user_profile_has_phone_number(self):
+        """Test user has location."""
+        self.assertIsNotNone(self.user.profile.phone)
+
+    def test_user_profile_has_bio(self):
+        """Test user has location."""
+        self.assertIsNotNone(self.user.profile.bio)
