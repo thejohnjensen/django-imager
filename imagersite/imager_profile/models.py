@@ -58,4 +58,14 @@ class ImagerProfile(models.Model):
         default='BW'
     )
     user = models.OneToOneField(User, related_name='profile')
+    # objects = models.ModelManager()
+    # active = ProfileManager()
 
+
+
+# TODO
+# @receiver(post_save, sender=User)
+# def create_profile(sender, **kwargs):
+#     if kwargs['created']:
+#         profile = ImagerProfile(user=kwargs['instance'], )
+#       profile.save()
