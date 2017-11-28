@@ -25,13 +25,17 @@ class ProfileTests(TestCase):
         self.user.save()
         photo = Photo()
         album = Album()
+        photo.user = self.user
         photo.title = 'Hello World'
         photo.description = 'My first photo'
         photo.image = 'http://cdn.spacetelescope.org/archives/images/screen/opo0328a.jpg'
+        album.user = self.user
         album.title = 'Hello World Around the World'
         album.description = 'First Album'
         photo.save()
         album.save()
 
-
-
+    def test_user_can_point_to_its_profile(self):
+        """Test username is created."""
+        # import pdb; pdb.set_trace()
+        self.assertTrue(self.user.username == 'bob')
