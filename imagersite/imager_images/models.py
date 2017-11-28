@@ -11,7 +11,7 @@ class Photo(models.Model):
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField()
+    date_published = models.DateTimeField(auto_now_add=True)
     PUBLISHED = [
         ('PRIVATE', 'Private'),
         ('SHARED', 'Shared'),
