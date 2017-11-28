@@ -10,6 +10,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         """Meta class is used to change factory boy settings."""
+
         model = User
     username = 'bob'
     email = 'bob@bob.com'
@@ -20,12 +21,9 @@ class ProfileTests(TestCase):
 
     def setUp(self):
         """Set up fixture for testing."""
-        profile = ImagerProfile()
         self.user = UserFactory.create()
         self.user.set_password('test_pass')
         self.user.save()
-        profile.user = self.user
-        profile.save()
 
     def test_user_can_point_to_its_profile(self):
         """Test user has profile."""

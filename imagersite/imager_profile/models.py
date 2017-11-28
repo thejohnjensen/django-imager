@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -14,8 +16,6 @@ class ImageActiveProfile(models.Manager):
 
 class ImagerProfile(models.Model):
     """Create model for database."""
-
-    active = ImageActiveProfile()
 
     @property
     def is_active(self):
@@ -57,15 +57,14 @@ class ImagerProfile(models.Model):
         choices=PHOTO_CHOICES,
         default='BW'
     )
-    user = models.OneToOneField(User, related_name='profile')
-    # objects = models.ModelManager()
-    # active = ProfileManager()
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    active = ImageActiveProfile()
+    objects = models.Manager()
 
 
-
-# TODO
-# @receiver(post_save, sender=User)
-# def create_profile(sender, **kwargs):
-#     if kwargs['created']:
-#         profile = ImagerProfile(user=kwargs['instance'], )
-#       profile.save()
+@receiver(post_save, sender=User)
+def create_profile(sender, **kwargs):
+    """."""
+    if kwargs['created']:
+        profile = ImagerProfile(user=kwargs['instance'], )
+        profile.save()
