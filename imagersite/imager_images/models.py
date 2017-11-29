@@ -23,6 +23,9 @@ class Photo(models.Model):
         default='PRIVATE'
     )
 
+    def __str__(self):
+        return 'Photo by {}.'.format(self.user.username)
+
 
 class Album(models.Model):
     """Model for adding photo albums."""
@@ -44,3 +47,6 @@ class Album(models.Model):
         choices=PUBLISHED,
         default='PRIVATE'
     )
+
+    def __str__(self):
+        return 'Album by {}.'.format(self.user.username)

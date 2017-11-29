@@ -61,6 +61,8 @@ class ImagerProfile(models.Model):
     active = ImageActiveProfile()
     objects = models.Manager()
 
+    def __str__(self):
+        return 'Profile for {}.'.format(self.user.username)
 
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):
