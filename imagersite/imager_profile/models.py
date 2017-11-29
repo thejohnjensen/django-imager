@@ -64,7 +64,7 @@ class ImagerProfile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):
-    """."""
+    """Attach profile to user."""
     if kwargs['created']:
         profile = ImagerProfile(user=kwargs['instance'], )
         profile.save()

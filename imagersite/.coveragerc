@@ -7,6 +7,8 @@ omit =
 
 source =
     imager_profile
+    imager_images
+    imagersite
 
 [report]
 show_missing = True

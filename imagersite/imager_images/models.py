@@ -28,7 +28,7 @@ class Album(models.Model):
     """Model for adding photo albums."""
 
     user = models.ForeignKey(User, related_name='album', on_delete=models.CASCADE)
-    photo = models.ManyToManyField(Photo)
+    photos = models.ManyToManyField(Photo)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
