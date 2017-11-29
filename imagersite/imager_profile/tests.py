@@ -2,8 +2,6 @@ from django.test import TestCase
 from imager_profile.models import ImagerProfile, User
 import factory
 
-# Create your tests here.
-
 
 class UserFactory(factory.django.DjangoModelFactory):
     """Create a new user from factory boy."""
