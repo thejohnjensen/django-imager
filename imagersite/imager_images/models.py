@@ -6,7 +6,7 @@ class Photo(models.Model):
     """Model for adding photos."""
 
     user = models.ForeignKey(User, related_name='photo', on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images')
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
@@ -24,7 +24,7 @@ class Photo(models.Model):
     )
 
     def __str__(self):
-        return 'Photo by {}.'.format(self.user.username)
+        return '{}'.format(self.title)
 
 
 class Album(models.Model):
@@ -34,6 +34,7 @@ class Album(models.Model):
     photos = models.ManyToManyField(Photo)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
+    cover = models.ImageField(upload_to='images', blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     date_published = models.DateTimeField(auto_now_add=True)
@@ -49,4 +50,4 @@ class Album(models.Model):
     )
 
     def __str__(self):
-        return 'Album by {}.'.format(self.user.username)
+        return '{}'.format(self.title)

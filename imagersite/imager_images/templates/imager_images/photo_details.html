@@ -1,0 +1,16 @@
+{% extends 'imagersite/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<h3>Photo Details</h3>
+
+<img class="photo" src="{{ photo.image.url }}" width="500" height="500" />
+<ul>
+    <li>Owner: {{ photo.user.username }}</li>
+    <li>Title: {{ photo.title }}</li>
+    <li>Description: {{ photo.description }}</li>
+    <li>Description: {{ photo.description }}</li>
+    <li>Date Uploaded: {{ photo.date_uploaded }}</li>
+    <li>Date Published: {{ photo.date_published }}</li>
+</ul>
+
+{% endblock %}
