@@ -12,9 +12,6 @@
     <!-- Bootstrap core CSS -->
     <!-- <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="../../static/imagersite/style.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
   </head>
 
   <body>
@@ -30,8 +27,15 @@
               <h3 class="masthead-brand">Cover</h3>
               <nav class="nav nav-masthead">
                 <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                {% if not request.user.is_authenticated %}
                 <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
                 <a class="nav-link" href="{% url 'registration_register' %}">Register</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                <a class="nav-link" href="{% url 'auth_logout' %}">Logout</a>
+                <a class="nav-link" href="{% url 'library' %}">Library</a>
+                <a class="nav-link" href="{% url 'profile' %}">{{user.username}}</a>
+                {% endif %}
               </nav>
             </div>
           </header>
@@ -58,6 +62,8 @@
 
     </div>
 
-
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link  href="/path/to/jquery.fancybox.min.css" rel="stylesheet">
+  <script src="/path/to/jquery.fancybox.min.js"></script>
   </body>
 </html>
