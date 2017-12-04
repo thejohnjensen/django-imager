@@ -3,7 +3,7 @@
 {% block content %}
 <h2>Albums Page</h2>
 {% for album in data.albums %}
-    <a href="{% url 'album_details' id=album.id %}">
+    <a href="{% url 'album_details' pk=album.pk %}">
     <img class="library_photos" src="{{ album.cover.url }}" width="150" height="150" />
     </a>
 {% endfor %}
