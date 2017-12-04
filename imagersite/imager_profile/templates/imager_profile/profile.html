@@ -6,6 +6,8 @@
 {% for key, value in DATA.items %}
     <p>{{ key }} = {{ value }}</p>
 {% endfor %}
-
+{% if DATA.username %}
+<a href="{% url 'update_profile' pk=DATA.pk %}"><button>Edit Profile</button></a>
+{% endif %}
 {% endif %}
 {% endblock %}
