@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# Create your models here.
-
 
 class ImageActiveProfile(models.Manager):
     """Class to set user to active."""
@@ -61,10 +59,14 @@ class ImagerProfile(models.Model):
     active = ImageActiveProfile()
     objects = models.Manager()
 
+    def __str__(self):
+        """Depict object as username."""
+        return 'Profile for {}.'.format(self.user.username)
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):
-    """."""
+    """Attach profile to user."""
     if kwargs['created']:
         profile = ImagerProfile(user=kwargs['instance'], )
         profile.save()

@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
     'imagersite',
     'imager_profile',
-    'imager_images'
+    'imager_images',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
+
 #  Account activation days required for HMAC
 ACCOUNT_ACTIVATION_DAYS = 7
 
@@ -136,4 +142,5 @@ ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # redirect user to home after login
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = 'profile'

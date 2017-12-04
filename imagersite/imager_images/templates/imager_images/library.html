@@ -1,0 +1,29 @@
+{% extends 'imagersite/base.html' %}
+{% load thumbnail %}
+
+
+{% block content %}
+<h2>Library Page</h2>
+<a href="{% url 'add_album' %}"><button>Add Album</button></a>
+<a href="{% url 'add_photo' %}"><button>Add Photo</button></a>
+
+<h3><a href="{% url 'photos' %}">Photos</a></h3>
+{% for photo in data.photos %}
+    {% thumbnail photo.image "720x720" crop="center" as im %}
+        <a data-fancybox="gallery" href="{{ im.url }}">
+            <img class="library_photos" src="{{ im.url }}" width="150" height="150" />
+        </a>
+{% endthumbnail %}
+{% endfor %}
+
+
+<h3><a href="{% url 'albums' %}">Albums</a></h3>
+{% for album in data.albums %}
+    {% thumbnail album.cover "720x720" crop="center" as im %}
+        <a data-fancybox="gallery" href="{{ im.url }}">
+            <img class="library_album_cover" src="{{ im.url }}" width="150" height="150" />
+        </a>
+{% endthumbnail %}
+{% endfor %}
+
+{% endblock %}

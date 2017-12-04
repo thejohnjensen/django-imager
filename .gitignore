@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Ignore media files
+imagersite/MEDIA/*
+!imagersite/MEDIA/.gitkeep
