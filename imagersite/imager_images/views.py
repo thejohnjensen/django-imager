@@ -21,12 +21,18 @@ def photo_view(request):
     return render(request, 'imager_images/photos.html', {'data': data})
 
 
-def album_view(request):
+class AlbumView(generic.ListView):
     """."""
-    data = {
-        'albums': request.user.album.all().filter(published='PUBLIC'),
-    }
-    return render(request, 'imager_images/albums.html', {'data': data})
+
+    model = Album
+    template_name = 'imager_images/albums.html'
+    context_object_name = 'data'
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(AlbumView, self).get_context_data(**kwargs)
+        context['data'] = context['view'].request.user.album.all()
+        return context
 
 
 class PhotoDetailView(generic.DetailView):
@@ -36,13 +42,12 @@ class PhotoDetailView(generic.DetailView):
     template_name = 'imager_images/photo_details.html'
 
 
-def album_details(request, pk):
+class AlbumDetailView(generic.DetailView):
     """."""
-    data = {
-        'photos': request.user.album.get(pk=pk).photos.all(),
-        'pk': pk
-    }
-    return render(request, 'imager_images/album_details.html', {'data': data})
+
+    model = Album
+    template_name = 'imager_images/album_details.html'
+    context_object_name = 'data'
 
 
 class NewPhotoView(generic.CreateView):
