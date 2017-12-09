@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', '')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-34-226-143-129.compute-1.amazonaws.com']
 
 
 # Application definition
@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
-        'PASS': os.environ.get('DB_PASS'),
+        'PASSWORD': os.environ.get('DB_PASS'),
         'HOST': os.environ.get('DB_HOST'),
         'PORT': 5432,
         'TEST': {
@@ -138,8 +138,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 ACCOUNT_ACTIVATION_DAYS = 7
 
 # email configuration
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'thejohnjensen@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+DEFAULT_FROM_EMAIL = 'thejohnjensen@gmail.com'
 # redirect user to home after login
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'profile'
+
