@@ -1,0 +1,23 @@
+description "django imager"
+
+start on (filesystem)
+stop on runlevel [016]
+
+respawn
+setuid nobody
+setgid nogroup
+
+chdir /home/ubuntu/django-imager
+
+env SECRET_KEY='4y^x))ezl=_v_2esnoe4p56)==ll=pr@0#u38c*_spu$bxloug'
+env DB_USER='jensjoh01'
+env DB_PASS='top_secret'
+env DB_NAME='imagerdb'
+env DB_HOST='django-imager.cqqf9jfr5oty.us-east-1.rds.amazonaws.com'
+env DEBUG='False'
+env TEST_DB='imager_test'
+env EMAIL_PASS='lbefalxllbfwwuir' 
+
+chdir /home/ubuntu/django-imager/imagersite
+
+exec /home/ubuntu/django-imager/bin/gunicorn -b :8080 imagersite.wsgi

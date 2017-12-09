@@ -6,7 +6,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home_view, name='home'),
+    url(r'^$', views.HomeView.as_view(), name='home'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^profile/', include('imager_profile.urls')),
     url(r'^images/', include('imager_images.urls'))
