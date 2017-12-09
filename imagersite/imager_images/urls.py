@@ -3,8 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^library/$', views.library_view, name='library'),
-    url(r'^photos/$', views.photo_view, name='photos'),
+    url(r'^library/$', views.LibraryView.as_view(), name='library'),
+    url(r'^photos/$', views.PhotoView.as_view(), name='photos'),
     url(r'^albums/$', views.AlbumView.as_view(), name='albums'),
     url(r'^photos/(?P<pk>\d+)$', views.PhotoDetailView.as_view(), name='photo_details'),
     url(r'^albums/(?P<pk>\d+)$', views.AlbumDetailView.as_view(), name='album_details'),
