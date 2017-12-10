@@ -1,52 +1,71 @@
-from django.shortcuts import render
+"""Handle the views for photo and album models."""
 from .models import Photo, Album
 from django.views import generic
 from django.core.urlresolvers import reverse_lazy
 
 
-def library_view(request):
-    """."""
-    data = {
-        'albums': request.user.album.all(),
-        'photos': request.user.photo.all(),
-    }
-    return render(request, 'imager_images/library.html', {'data': data})
+class LibraryView(generic.ListView):
+    """View for the library page."""
+
+    model = Photo
+    template_name = 'imager_images/library.html'
+    context_object_name = 'data'
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(LibraryView, self).get_context_data(**kwargs)
+        context['data'] = {
+            'albums': context['view'].request.user.album.all(),
+            'photos': context['view'].request.user.photo.all()
+        }
+        return context
 
 
-def photo_view(request):
-    """."""
-    data = {
-        'photos': request.user.photo.all().filter(published='PUBLIC')
-    }
-    return render(request, 'imager_images/photos.html', {'data': data})
+class PhotoView(generic.ListView):
+    """Display all the users public photos on the photos page."""
+
+    model = Photo
+    template_name = 'imager_images/photos.html'
+    context_object_name = 'data'
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(PhotoView, self).get_context_data(**kwargs)
+        context['data'] = context['view'].request.user.photo.all()
+        return context
 
 
-def album_view(request):
-    """."""
-    data = {
-        'albums': request.user.album.all().filter(published='PUBLIC'),
-    }
-    return render(request, 'imager_images/albums.html', {'data': data})
+class AlbumView(generic.ListView):
+    """View for the album page for users albums."""
+
+    model = Album
+    template_name = 'imager_images/albums.html'
+    context_object_name = 'data'
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(AlbumView, self).get_context_data(**kwargs)
+        context['data'] = context['view'].request.user.album.all()
+        return context
 
 
 class PhotoDetailView(generic.DetailView):
-    """."""
+    """View for single photo, can edit from this page."""
 
     model = Photo
     template_name = 'imager_images/photo_details.html'
 
 
-def album_details(request, pk):
-    """."""
-    data = {
-        'photos': request.user.album.get(pk=pk).photos.all(),
-        'pk': pk
-    }
-    return render(request, 'imager_images/album_details.html', {'data': data})
+class AlbumDetailView(generic.DetailView):
+    """View for single album, can edit from this page."""
+
+    model = Album
+    template_name = 'imager_images/album_details.html'
+    context_object_name = 'data'
 
 
 class NewPhotoView(generic.CreateView):
-    """."""
+    """View to add a new photo."""
 
     model = Photo
     template_name = 'imager_images/new_photo.html'
@@ -55,7 +74,7 @@ class NewPhotoView(generic.CreateView):
 
 
 class NewAlbumView(generic.CreateView):
-    """."""
+    """View to add a new album."""
 
     model = Album
     template_name = 'imager_images/new_album.html'
@@ -64,7 +83,7 @@ class NewAlbumView(generic.CreateView):
 
 
 class EditPhotoView(generic.UpdateView):
-    """."""
+    """View to edit photo."""
 
     model = Photo
     template_name = 'imager_images/edit_photo.html'
@@ -73,7 +92,7 @@ class EditPhotoView(generic.UpdateView):
 
 
 class EditAlbumView(generic.UpdateView):
-    """."""
+    """View to add album."""
 
     model = Album
     template_name = 'imager_images/edit_album.html'

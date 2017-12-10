@@ -2,12 +2,12 @@
 
 {% block content %}
 <h2>Profile Page</h2>
-{% if DATA %}
-{% for key, value in DATA.items %}
+{% if data %}
+{% for key, value in data.items %}
     <p>{{ key }} = {{ value }}</p>
 {% endfor %}
-{% if DATA.username %}
-<a href="{% url 'update_profile' pk=DATA.pk %}"><button>Edit Profile</button></a>
+{% if data.username %}
+<a href="{% url 'update_profile' pk=view.request.user.pk %}"><button>Edit Profile</button></a>
 {% endif %}
 {% endif %}
 {% endblock %}

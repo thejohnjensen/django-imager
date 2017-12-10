@@ -6,6 +6,6 @@
    <h2>Hello {{ request.user.username }} </h2>
    {% else %}
    <h2>Please login</h2>
-   {% endif %}
-   <img src="{{image.image.url}}" width="500px" />
+   {% endif %} 
+   <img src="{{ data.photo.image.url }}" width="500px" />
 {% endblock %}
