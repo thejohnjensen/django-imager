@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'imager_profile',
     'imager_images',
     'sorl.thumbnail',
+    'storages'
 ]
 
 MIDDLEWARE = [
