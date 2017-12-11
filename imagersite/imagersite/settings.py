@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', '')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['ec2-34-226-143-129.compute-1.amazonaws.com', 'localhost']
 
@@ -141,7 +141,6 @@ DEFAULT_FROM_EMAIL = 'thejohnjensen@gmail.com'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'profile'
 
-# import pdb; pdb.set_trace()
 if not DEBUG:
     # add S3
     AWS_ACCESS_KEY_ID = os.environ.get('IAM_AWS_ACCESS_KEY_ID')
