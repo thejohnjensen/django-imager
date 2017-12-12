@@ -1,0 +1,13 @@
+{% extends 'imagersite/base.html' %}
+
+{% block content %}
+<h2>Profile Page</h2>
+{% if data %}
+{% for key, value in data.items %}
+    <p>{{ key }} = {{ value }}</p>
+{% endfor %}
+{% if data.username %}
+<a href="{% url 'update_profile' pk=view.request.user.pk %}"><button>Edit Profile</button></a>
+{% endif %}
+{% endif %}
+{% endblock %}

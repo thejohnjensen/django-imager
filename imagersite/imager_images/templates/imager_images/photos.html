@@ -1,0 +1,12 @@
+{% extends 'imagersite/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<h3>Photos</h3>
+{% for photo in data %}
+    {% thumbnail photo.image "720x720" crop="center" as im %}
+        <a href="{% url 'photo_details' pk=photo.pk %}">
+            <img class="library_photos" src="{{ im.url }}" width="150" height="150" />
+        </a>
+{% endthumbnail %}
+{% endfor %}
+{% endblock %}
