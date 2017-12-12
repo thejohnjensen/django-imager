@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', '')
-# DEBUG = True
+# DEBUG = os.environ.get('DEBUG', '')
+DEBUG = False
 
 ALLOWED_HOSTS = ['ec2-34-226-143-129.compute-1.amazonaws.com', 'localhost']
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'imager_profile',
     'imager_images',
     'sorl.thumbnail',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -129,11 +130,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 
 #  Account activation days required for HMAC
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -150,3 +151,25 @@ DEFAULT_FROM_EMAIL = 'thejohnjensen@gmail.com'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'profile'
 
+if not DEBUG:
+    # add S3
+    AWS_ACCESS_KEY_ID = os.environ.get('IAM_AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_S3_REGION_NAME = 'us-west-2'
+
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'imagersite.custom_storages.StaticStorage'
+    STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+    MEDIAFILES_LOCATION = 'media'
+    DEFUALT_FILE_STORAGE = 'imagersite.custom_storages.MediaStorage'
+    MEDIA_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+else:
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.11/howto/static-files/
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
