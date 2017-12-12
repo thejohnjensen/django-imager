@@ -37,7 +37,7 @@
         clone=yes
         repo=https://github.com/thejohnjensen/django-imager.git
         dest=/home/ubuntu/django-imager
-        version=front-end-3
+        version=revert
 
     - name: Create a virtual environment in the django-imager repo
       command: python3 -m venv /home/ubuntu/django-imager

@@ -103,3 +103,7 @@ ENV/
 # Ignore media files
 imagersite/MEDIA/*
 !imagersite/MEDIA/.gitkeep
+
+hosts
+
+templates/*
