@@ -153,6 +153,7 @@ LOGIN_REDIRECT_URL = 'profile'
 
 if not DEBUG:
     # add S3
+    # import pdb; pdb.set_trace()
     AWS_ACCESS_KEY_ID = os.environ.get('IAM_AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
