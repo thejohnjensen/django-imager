@@ -126,11 +126,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-
 #  Account activation days required for HMAC
 ACCOUNT_ACTIVATION_DAYS = 7
 
@@ -161,6 +156,7 @@ if not DEBUG:
     MEDIAFILES_LOCATION = 'media'
     MEDIA_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
     DEFAULT_FILE_STORAGE = 'imagersite.custom_storages.MediaStorage'
+
 else:
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -168,3 +164,4 @@ else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
+
