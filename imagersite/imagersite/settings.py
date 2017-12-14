@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG', '')
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', '')
+
 
 ALLOWED_HOSTS = ['ec2-34-226-143-129.compute-1.amazonaws.com', 'localhost']
 
@@ -130,11 +130,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-# STATIC_URL = '/static/'
-
-# MEDIA_URL = '/media/'
-
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 
 #  Account activation days required for HMAC
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -153,7 +148,6 @@ LOGIN_REDIRECT_URL = 'profile'
 
 if not DEBUG:
     # add S3
-    # import pdb; pdb.set_trace()
     AWS_ACCESS_KEY_ID = os.environ.get('IAM_AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
@@ -165,8 +159,8 @@ if not DEBUG:
     STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
     MEDIAFILES_LOCATION = 'media'
-    DEFUALT_FILE_STORAGE = 'imagersite.custom_storages.MediaStorage'
     MEDIA_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'imagersite.custom_storages.MediaStorage'
 else:
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.11/howto/static-files/
