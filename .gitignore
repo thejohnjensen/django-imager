@@ -105,4 +105,4 @@ imagersite/MEDIA/*
 !imagersite/MEDIA/.gitkeep
 
 hosts
-templates/*
+

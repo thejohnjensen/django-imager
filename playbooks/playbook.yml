@@ -37,7 +37,8 @@
         clone=yes
         repo=https://github.com/thejohnjensen/django-imager.git
         dest=/home/ubuntu/django-imager
-        version=front-end-3
+        version=revert
+        force=yes
 
     - name: Create a virtual environment in the django-imager repo
       command: python3 -m venv /home/ubuntu/django-imager
@@ -63,7 +64,7 @@
       when: not default_stat.stat.exists
 
     - name: Create a new default file for nginx
-      template: src=../templates/nginx_config.jinja2 dest=/etc/nginx/sites-available/default
+      template: src=../templates/nginx_config dest=/etc/nginx/sites-available/default
       become: yes
       become_method: sudo
 

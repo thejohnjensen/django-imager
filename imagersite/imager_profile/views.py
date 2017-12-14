@@ -1,5 +1,4 @@
 """View module for home page and profile."""
-import random
 from django.views import generic
 from django.core.urlresolvers import reverse_lazy
 from .models import ImagerProfile
@@ -16,31 +15,6 @@ class HomeView(generic.ListView):
     model = ImagerProfile
     template_name = 'imagersite/home.html'
     context_object_name = 'data'
-
-    def get_context_data(self, **kwargs):
-        """."""
-        context = super(HomeView, self).get_context_data(**kwargs)
-        if context['view'].request.user.username:
-            photos = context['view'].request.user.photo.all().filter(published='PUBLIC')
-            rand = random.randint(0, len(photos) - 1)
-            context['data'] = {
-                'photo': photos[rand]
-            }
-        else:
-            photo = False
-            while not photo:
-                users = context['data']
-                ran_user = random.randint(0, len(users) - 1)
-                user = users[ran_user]
-                if user.user.photo.all().filter(published='PUBLIC'):
-                    photos = user.user.photo.all().filter(published='PUBLIC')
-                    rand = random.randint(0, len(photos) - 1)
-                    photo = photos[rand]
-                    context['data'] = {
-                        'photo': photo
-                    }
-
-        return context
 
 
 class ProfileView(generic.ListView):
