@@ -37,12 +37,11 @@
         clone=yes
         repo=https://github.com/thejohnjensen/django-imager.git
         dest=/home/ubuntu/django-imager
-        version=revert
 
-    - name: Create a virtual environment in the django-imager repo
-      command: python3 -m venv /home/ubuntu/django-imager
-      become: yes
-      become_method: sudo
+    # - name: Create a virtual environment in the django-imager repo
+    #   command: python3 -m venv /home/ubuntu/django-imager
+    #   become: yes
+    #   become_method: sudo
 
     - name: Install gunicorn to the virtualenv
       pip: virtualenv=/home/ubuntu/django-imager name=gunicorn
@@ -50,7 +49,7 @@
     - name: Install Requirements
       pip: 
         requirements=/home/ubuntu/django-imager/requirements.pip
-        virtualenv=/home/ubuntu/django-imager
+        # virtualenv=/home/ubuntu/django-imager
 
     - name: Register the old default file
       stat: path=/etc/nginx/sites-available/default.old
